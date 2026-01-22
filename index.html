@@ -25,6 +25,10 @@
             --hbo-purple: #9933CC;
             --crunchy-orange: #F47521;
             --capcut-teal: #00ebd3;
+            
+            /* Cores Comunidade */
+            --discord: #5865F2;
+            --telegram: #0088cc;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Montserrat', sans-serif; }
@@ -128,6 +132,18 @@
         .card.capcut:hover .btn { background: var(--capcut-teal); color: #000; border-color: var(--capcut-teal); box-shadow: 0 0 20px rgba(0, 235, 211, 0.5); }
         
         .btn:disabled { opacity: 0.5; cursor: not-allowed; border-color: #333; color: #555; background: transparent; box-shadow: none; }
+
+        /* --- RODAPÉ COMUNIDADE --- */
+        .community-footer { text-align: center; padding: 4rem 5%; border-top: 1px solid #222; margin-top: 4rem; background: #0a0b10; }
+        .community-btn { 
+            display: inline-flex; align-items: center; gap: 10px; padding: 12px 25px; border-radius: 8px; 
+            text-decoration: none; font-weight: 700; margin: 10px; transition: 0.3s; border: 1px solid transparent; 
+        }
+        .btn-discord { color: #fff; border-color: var(--discord); background: rgba(88, 101, 242, 0.1); }
+        .btn-discord:hover { background: var(--discord); box-shadow: 0 0 20px rgba(88, 101, 242, 0.5); transform: translateY(-3px); }
+        
+        .btn-telegram { color: #fff; border-color: var(--telegram); background: rgba(0, 136, 204, 0.1); }
+        .btn-telegram:hover { background: var(--telegram); box-shadow: 0 0 20px rgba(0, 136, 204, 0.5); transform: translateY(-3px); }
 
         /* --- MODALS & SIDEBAR --- */
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); backdrop-filter: blur(5px); z-index: 2000; display: none; align-items: center; justify-content: center; }
@@ -311,6 +327,19 @@
 
     </div>
 
+    <footer class="community-footer">
+        <h3 style="color: #fff; margin-bottom: 20px; font-weight: 300; font-size: 1.5rem;">Participe da nossa <span style="color: var(--primary);">Comunidade</span></h3>
+        <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+            <a href="SEU_LINK_DISCORD_AQUI" target="_blank" class="community-btn btn-discord">
+                <i class="fa-brands fa-discord" style="font-size: 1.2rem;"></i> Discord
+            </a>
+            <a href="SEU_LINK_TELEGRAM_AQUI" target="_blank" class="community-btn btn-telegram">
+                <i class="fa-brands fa-telegram" style="font-size: 1.2rem;"></i> Telegram
+            </a>
+        </div>
+        <p style="color: #444; font-size: 0.8rem; margin-top: 40px;">&copy; 2026 PrimeCast. Todos os direitos reservados.</p>
+    </footer>
+
     <div class="modal-overlay" id="loginModal">
         <div class="modal-card">
             <span onclick="closeModal('loginModal')" style="position: absolute; top: 20px; right: 20px; color: #666; cursor: pointer; font-size: 1.5rem;">&times;</span>
@@ -381,10 +410,8 @@
                 // Adicione mais aqui: { l: '...', p: '...' },
             ],
             'disney': [
-                { l: 'disney@mail.com', p: 'Mickey01'},
                 { l: 'disney@mail.com', p: 'Mickey01' }
             ],
-            
             'hbo': [
                 { l: 'hbo@max.com', p: 'hbo123' }
             ],
