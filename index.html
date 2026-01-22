@@ -3,89 +3,512 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Como surgiu a tecnologia</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="shortcut icon" href="icons8-internet-16.png" type="image/x-icon">
+    <title>PrimeCast | Streaming Store</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&display=swap');
+
+        /* --- TEMA CYBER BLUE --- */
+        :root {
+            --primary: #00f2ff;       
+            --bg-body: #050505;       
+            --bg-card: #0a0b10;       
+            --border: rgba(0, 242, 255, 0.3);
+            --text: #ffffff;
+            --success: #00ff88;
+            --danger: #ff3355;
+            --gradient: linear-gradient(135deg, #0062ff, #00f2ff);
+            
+            /* Cores Marcas */
+            --netflix-red: #E50914;
+            --disney-blue: #113CCF;
+            --hbo-purple: #9933CC;
+            --crunchy-orange: #F47521;
+            --capcut-teal: #00ebd3;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Montserrat', sans-serif; }
+        
+        body { 
+            background-color: var(--bg-body); 
+            color: var(--text); 
+            overflow-x: hidden; 
+            background-image: radial-gradient(circle at 50% 0%, #0d1221 0%, #000000 80%);
+        }
+
+        /* --- HEADER --- */
+        header {
+            padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center;
+            background: rgba(5, 5, 5, 0.9); backdrop-filter: blur(15px);
+            position: fixed; width: 100%; z-index: 1000; border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .logo-container { display: flex; align-items: center; gap: 10px; }
+        .logo-text { font-size: 1.2rem; font-weight: 800; letter-spacing: 1px; color: #fff; text-transform: uppercase; }
+        .logo-text span { color: var(--primary); }
+        .logo-svg-small { width: 30px; height: 30px; fill: var(--primary); filter: drop-shadow(0 0 5px var(--primary)); }
+
+        .header-actions { display: flex; align-items: center; gap: 20px; }
+        .auth-trigger { font-size: 0.85rem; color: #ccc; cursor: pointer; transition: 0.3s; display: flex; align-items: center; gap: 8px; font-weight: 600; }
+        .auth-trigger:hover { color: var(--primary); }
+        .cart-trigger { position: relative; cursor: pointer; }
+        .cart-count { position: absolute; top: -8px; right: -8px; background: var(--primary); color: #000; font-size: 0.7rem; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; box-shadow: 0 0 8px var(--primary); }
+
+        /* --- HERO --- */
+        .hero {
+            min-height: 70vh;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            text-align: center; padding-top: 80px; position: relative;
+        }
+        .hero-logo-box { width: 100px; height: 100px; margin-bottom: 20px; animation: float 4s ease-in-out infinite; }
+        .hero-logo-svg { width: 100%; height: 100%; fill: var(--primary); filter: drop-shadow(0 0 20px rgba(0, 242, 255, 0.6)); }
+        .hero h1 { 
+            font-size: 4rem; font-weight: 800; letter-spacing: -2px; margin-bottom: 0.5rem;
+            background: linear-gradient(to right, #fff, #aaa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-transform: uppercase;
+        }
+        .hero h1 span { background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero p { color: #888; font-size: 1.1rem; max-width: 600px; line-height: 1.6; }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+        /* --- TÍTULOS --- */
+        .section-header { 
+            text-align: left; 
+            margin: 3rem 0 2rem 0; 
+            position: relative; 
+            padding-left: 15px; 
+            border-left: 5px solid var(--primary); 
+        }
+        .section-title { 
+            font-size: 1.8rem; font-weight: 800; color: #fff; text-transform: uppercase; letter-spacing: 2px; display: inline-block;
+        }
+        .section-title span { color: var(--primary); text-shadow: 0 0 15px rgba(0, 242, 255, 0.4); }
+
+        /* --- CARDS --- */
+        .container { padding: 0 5% 5rem; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2rem; }
+
+        .card { 
+            background: var(--bg-card); border: 1px solid rgba(255,255,255,0.05); border-radius: 16px; padding: 2rem; 
+            text-align: center; transition: all 0.3s ease; position: relative; overflow: hidden; display: flex; flex-direction: column;
+        }
+        
+        /* HOVERS */
+        .card:hover { transform: translateY(-8px); border-color: var(--primary); box-shadow: 0 10px 50px rgba(0, 242, 255, 0.1); }
+        .card.netflix:hover { border-color: var(--netflix-red); box-shadow: 0 10px 50px rgba(229, 9, 20, 0.3); }
+        .card.disney:hover { border-color: var(--disney-blue); box-shadow: 0 10px 50px rgba(17, 60, 207, 0.3); }
+        .card.hbo:hover { border-color: var(--hbo-purple); box-shadow: 0 10px 50px rgba(153, 51, 204, 0.3); }
+        .card.crunchy:hover { border-color: var(--crunchy-orange); box-shadow: 0 10px 50px rgba(244, 117, 33, 0.3); }
+        .card.capcut:hover { border-color: var(--capcut-teal); box-shadow: 0 10px 50px rgba(0, 235, 211, 0.3); }
+
+        .card-logo { height: 50px; width: auto; margin: 20px auto 10px; display: block; object-fit: contain; filter: drop-shadow(0 0 8px rgba(0,0,0,0.5)); }
+        
+        .product-tag { background: rgba(0, 242, 255, 0.05); color: var(--primary); padding: 6px 14px; border-radius: 50px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; align-self: center; border: 1px solid rgba(0, 242, 255, 0.2); letter-spacing: 1px; transition: 0.3s; }
+        
+        .card.netflix:hover .product-tag { border-color: var(--netflix-red); color: var(--netflix-red); background: rgba(229, 9, 20, 0.1); }
+        .card.disney:hover .product-tag { border-color: var(--disney-blue); color: var(--disney-blue); background: rgba(17, 60, 207, 0.1); }
+        .card.hbo:hover .product-tag { border-color: var(--hbo-purple); color: var(--hbo-purple); background: rgba(153, 51, 204, 0.1); }
+        .card.crunchy:hover .product-tag { border-color: var(--crunchy-orange); color: var(--crunchy-orange); background: rgba(244, 117, 33, 0.1); }
+        .card.capcut:hover .product-tag { border-color: var(--capcut-teal); color: var(--capcut-teal); background: rgba(0, 235, 211, 0.1); }
+
+        .card h3 { font-size: 1.4rem; margin: 10px 0 10px; font-weight: 700; color: #fff; }
+        .card-description { color: #888; font-size: 0.9rem; line-height: 1.5; margin-bottom: 20px; min-height: 50px; }
+        .price { font-size: 2.2rem; color: #fff; font-weight: 700; margin-bottom: 5px; text-shadow: 0 0 15px rgba(0, 242, 255, 0.2); }
+        
+        .stock-badge { font-size: 0.8rem; color: #666; margin-bottom: 20px; }
+        .stock-badge span { color: var(--primary); font-weight: bold; }
+        .sold-out { color: var(--danger); }
+
+        .btn { width: 100%; padding: 15px; background: transparent; border: 1px solid var(--border); color: var(--primary); font-weight: 700; text-transform: uppercase; cursor: pointer; transition: 0.3s; border-radius: 8px; margin-top: auto; letter-spacing: 1px; font-size: 0.9rem; }
+        .btn:hover { background: var(--primary); color: #000; box-shadow: 0 0 25px rgba(0, 242, 255, 0.4); }
+        
+        .card.netflix:hover .btn { background: var(--netflix-red); color: #fff; border-color: var(--netflix-red); box-shadow: 0 0 20px rgba(229, 9, 20, 0.5); }
+        .card.disney:hover .btn { background: var(--disney-blue); color: #fff; border-color: var(--disney-blue); box-shadow: 0 0 20px rgba(17, 60, 207, 0.5); }
+        .card.hbo:hover .btn { background: var(--hbo-purple); color: #fff; border-color: var(--hbo-purple); box-shadow: 0 0 20px rgba(153, 51, 204, 0.5); }
+        .card.crunchy:hover .btn { background: var(--crunchy-orange); color: #fff; border-color: var(--crunchy-orange); box-shadow: 0 0 20px rgba(244, 117, 33, 0.5); }
+        .card.capcut:hover .btn { background: var(--capcut-teal); color: #000; border-color: var(--capcut-teal); box-shadow: 0 0 20px rgba(0, 235, 211, 0.5); }
+        
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; border-color: #333; color: #555; background: transparent; box-shadow: none; }
+
+        /* --- MODALS & SIDEBAR --- */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); backdrop-filter: blur(5px); z-index: 2000; display: none; align-items: center; justify-content: center; }
+        .modal-overlay.active { display: flex; animation: fadeIn 0.3s; }
+        .modal-card { background: #0f0f0f; width: 90%; max-width: 450px; padding: 2.5rem; border-radius: 20px; border: 1px solid #333; position: relative; box-shadow: 0 0 50px rgba(0,0,0,0.5); }
+        .modal-wide { max-width: 800px; }
+        
+        .login-header { text-align: center; margin-bottom: 2rem; }
+        .login-header h2 { color: #fff; font-weight: 300; font-size: 1.8rem; margin-bottom: 0.5rem; }
+        .login-header p { color: #666; font-size: 0.9rem; }
+        .toggle-auth { text-align: center; margin-top: 20px; font-size: 0.85rem; color: #666; cursor: pointer; }
+        .toggle-auth span { color: var(--primary); text-decoration: underline; }
+
+        .input-field { width: 100%; padding: 15px; background: #1a1a1a; border: 1px solid #333; color: #fff; margin-bottom: 15px; border-radius: 8px; outline: none; transition: 0.3s; }
+        .input-field:focus { border-color: var(--primary); }
+        .submit-btn { width: 100%; padding: 15px; background: var(--gradient); border: none; border-radius: 8px; color: #000; font-weight: 800; cursor: pointer; margin-top: 10px; font-size: 1rem; }
+        
+        .secondary-btn { margin-top: 10px; border: 1px solid #333; background: #151515; color: #fff; padding: 12px; width: 100%; border-radius: 8px; cursor: pointer; transition: 0.3s; }
+        .secondary-btn:hover { border-color: var(--primary); color: var(--primary); }
+
+        .sidebar { position: fixed; top: 0; right: -400px; width: 380px; height: 100%; background: #0a0a0a; border-left: 1px solid #222; z-index: 2500; padding: 2rem; display: flex; flex-direction: column; transition: 0.4s ease; box-shadow: -20px 0 50px rgba(0,0,0,0.5); }
+        .sidebar.open { right: 0; }
+        .cart-item { display: flex; justify-content: space-between; padding: 15px 0; border-bottom: 1px solid #222; align-items: center; }
+        .cart-remove { color: var(--danger); cursor: pointer; padding: 5px; transition: 0.2s; }
+        .cart-remove:hover { transform: scale(1.2); }
+
+        .pix-code { background: #000; padding: 15px; border-radius: 8px; color: #888; font-family: monospace; font-size: 0.85rem; margin: 15px 0; border: 1px dashed #333; word-break: break-all; }
+        .error-box { display: none; background: rgba(255, 51, 85, 0.1); border: 1px solid var(--danger); color: var(--danger); padding: 12px; border-radius: 8px; margin-top: 15px; font-size: 0.9rem; }
+
+        .profile-header { display: flex; align-items: center; gap: 15px; margin-bottom: 25px; padding-bottom: 20px; border-bottom: 1px solid #222; }
+        .profile-avatar { width: 60px; height: 60px; background: var(--gradient); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: #000; font-weight: bold; }
+        .history-list { max-height: 300px; overflow-y: auto; margin-bottom: 20px; }
+        .history-item { display: flex; justify-content: space-between; align-items: center; background: #1a1a1a; padding: 15px; border-radius: 8px; margin-bottom: 10px; cursor: pointer; transition: 0.3s; }
+        .history-item:hover { background: #222; border-left: 2px solid var(--primary); }
+        
+        .access-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 20px; max-height: 60vh; overflow-y: auto; }
+        .access-card { background: #151515; border: 1px solid #222; border-radius: 10px; padding: 1.5rem; display: flex; flex-direction: column; gap: 10px; border-left: 3px solid var(--primary); }
+        .credential-box { background: #000; padding: 12px; border-radius: 6px; font-family: monospace; display: flex; justify-content: space-between; align-items: center; font-size: 0.9rem; border: 1px solid #222; }
+        .blur-text { filter: blur(5px); cursor: pointer; transition: 0.3s; user-select: none; }
+        .blur-text:hover, .blur-text.revealed { filter: blur(0); }
+        .copy-icon { color: #555; cursor: pointer; transition: 0.3s; }
+        .copy-icon:hover { color: var(--primary); }
+
+        .logout-btn { background: rgba(255, 51, 85, 0.1); color: var(--danger); border: 1px solid var(--danger); }
+        .logout-btn:hover { background: var(--danger); color: #fff; border-color: var(--danger); }
+
+        @keyframes fadeIn { from{opacity:0} to{opacity:1} }
+    </style>
 </head>
 <body>
+
     <header>
-        <h1>Curiosidades de tecnologia</h1>
-        <p>Tudo aquilo que você sempre quiz sobre o mundo Tech, em um único
-         lugar</p>
+        <div class="logo-container">
+            <svg class="logo-svg-small" viewBox="0 0 24 24">
+                <path d="M12 2L2 7l10 5 10-5-10-5zm0 9l2.5-1.25L12 8.5l-2.5 1.25L12 11zm0 2.5l-5-2.5-5 2.5L12 22l10-8.5-5-2.5-5 2.5z"/>
+            </svg>
+            <div class="logo-text">Prime<span>Cast</span></div>
+        </div>
+
+        <div class="header-actions">
+            <div class="auth-trigger" id="myAccessBtn" style="display: none;" onclick="openLibrary()">
+                <i class="fa-solid fa-unlock-keyhole"></i> <span>MEUS ACESSOS</span>
+            </div>
+            <div class="auth-trigger" id="authBtn" onclick="handleAuthClick()">
+                <i class="fa-regular fa-user"></i> <span>LOGIN</span>
+            </div>
+            <div class="cart-trigger" onclick="toggleCart()">
+                <i class="fa-solid fa-bag-shopping" style="color: #fff; font-size: 1.3rem;"></i>
+                <div class="cart-count" id="cartCount">0</div>
+            </div>
+        </div>
     </header>
-    <nav>
-        <a href="#">Home</a>
-        <a href="#">Noticias</a>
-        <a href="#">Curiosidades</a>
-        <a href="#">Fale conosco</a>
-    </nav> 
-    <main>
-       <article>
-            <h1>tecnologia</h1>
 
-            <p>Muito se fala atualmente sobre tecnologia. Sobre como ela está avançando mais a cada dia, como tudo está ficando muito mais rápido e, claro, mais “tecnológico”. As novas tecnologias estão ficando cada vez mais comuns e importantes em nossas vidas. Mas, algo que pouco se fala é: o que é tecnologia exatamente? Quando falamos de tecnologia pensamos em nossos <strong>celulares</strong>, em computadores, robôs e ficção científica. Mas tecnologia é só isso?</p>
+    <div class="sidebar" id="cartSidebar">
+        <div style="display: flex; justify-content: space-between; margin-bottom: 30px; align-items: center;">
+            <h2 style="font-weight: 800; font-size: 1.5rem;">CARRINHO</h2>
+            <i class="fa-solid fa-xmark" onclick="toggleCart()" style="cursor: pointer; color: #666; font-size: 1.5rem;"></i>
+        </div>
+        <div id="cartItems" style="flex: 1; overflow-y: auto;">
+            <p style="text-align: center; color: #444; margin-top: 50px;">Seu carrinho está vazio.</p>
+        </div>
+        <div style="border-top: 1px solid #222; padding-top: 20px;">
+            <div style="display: flex; justify-content: space-between; font-size: 1.2rem; margin-bottom: 20px; font-weight: bold;">
+                <span>Total</span>
+                <span id="cartTotal" style="color: var(--primary);">R$ 0,00</span>
+            </div>
+            <button class="submit-btn" onclick="checkout()">FINALIZAR COMPRA</button>
+        </div>
+    </div>
 
-            <h2>A primeira versão</h2>
+    <section class="hero">
+        <div class="hero-logo-box">
+            <svg class="hero-logo-svg" viewBox="0 0 24 24">
+                <path d="M21 12l-18 10V2l18 10z" />
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" style="opacity: 0.3;"/>
+            </svg>
+        </div>
+        <h1>Prime<span>Cast</span></h1>
+        <p>Streaming Premium. Entrega Imediata.</p>
+    </section>
 
-            <p>Não, não é só isso. Se você der uma passada na Wikipédia, você vai descobrir que tecnologia é “o conjunto de técnicas, habilidades, métodos e processos usados na produção de bens ou serviços, ou na realização de objetivos, como por exemplo em investigações científicas”. Em português, isso quer dizer que toda técnica, toda ferramenta, todo procedimento que usamos no dia a dia ou no trabalho é uma <strong>tecnologia</strong>.</p>
+    <div class="container">
+        
+        <div class="section-header">
+            <h2 class="section-title">Streaming <span>Premium</span></h2>
+        </div>
 
-            <img src="tecnologia-e-pessoas.webp" alt="">
+        <div class="grid">
             
-            <p>
-                Não é de hoje que estamos rodeados pela <a href="#" target="_blank">tecnologia</a>. Ela surgiu lá na pré-história, e foi crucial para conseguirmos sobreviver como espécie. Nós seres humanos somos bem frágeis se comparados a outros animais: nossa pele é fina, nossos músculos são pequenos, nossos ossos são frágeis e nossas unhas são minúsculas.
-                
-            </p>
-            <h3>Surgimento da tecnologia</h3>
-
-            <p>Porém, desde que nos tornamos Homo sapiens, fomos dotados de duas características que nos permitiram modificar a natureza a nosso favor: o polegar opositor e o telencéfalo altamente desenvolvido.</p>
-
-            <img src="tecnologia-inteligente-trabalho-humanizado.png" alt="">
-            
-            <p>
-                O telencéfalo é aquela parte maior e enrugada do cérebro, logo acima do cerebelo. É nessa parte que acontecem as funções cruciais para a idealização de tecnologias: processamento dos sentidos, processamento de linguagem e armazenamento de memória e do aprendizado.
-                Com isso, pudemos lascar pedras e deixá-las mais afiadas, amarrando elas a cabos para criar lanças e facas, para usar no lugar de unhas, e transformar a pele de animais em roupas, que usamos para nos aquecer e nos proteger. E graças à linguagem, passamos esse conhecimento de uma geração a outra, e as gerações seguintes foram aprimorando o que já existia e descobrindo coisas novas.
-            </p>
-
-            <img src="tecnologia-2-og.webp" alt="">
-            
-            <p>
-                Já vimos com mais detalhes o que é tecnologia, e como ela surgiu. Que tal discutirmos um pouco por que e como funciona a tecnologia?
-                Como a tecnologia avança?
-                Toda tecnologia funciona de uma forma diferente, mas sendo tecnologias, elas têm algumas propriedades comuns. para poderem funcionar e serem usadas, seguem um mesmo processo:
-                Desenvolvimento: desenvolve-se um protótipo da tecnologia, uma prova de conceito e ela é posta em prática para encontrar resultados iniciais.
-            </p>
-            
-            <div class="video">
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/l2UDgpLz20M?si=y5If2cgtcv5c-pEG" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            <div class="card netflix">
+                <span class="product-tag">Mais Vendido</span>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" alt="Netflix" class="card-logo">
+                <h3>Netflix 4K</h3>
+                <p class="card-description">Assista onde quiser. 4 Telas Ultra HD, sem anúncios e com áudio espacial.</p>
+                <div class="price">R$ 0,11</div>
+                <div class="stock-badge" id="stock-netflix">...</div>
+                <button class="btn" id="btn-netflix" onclick="addToCart('Netflix 4K Premium', 0.11, 'netflix')">Adicionar</button>
             </div>
 
-            <aside>
-                <h4>QUER APRENDER MAIS?</h4>
+            <div class="card disney">
+                <span class="product-tag">Combo Família</span>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/3/3e/Disney%2B_logo.svg" alt="Disney+" class="card-logo" style="height: 45px;">
+                <h3>Disney+ 4K</h3>
+                <p class="card-description">O lar de Disney, Pixar, Marvel, Star Wars e esportes ao vivo na ESPN.</p>
+                <div class="price">R$ 27,90</div>
+                <div class="stock-badge" id="stock-disney">...</div>
+                <button class="btn" id="btn-disney" onclick="addToCart('Disney+ 4K', 27.90, 'disney')">Adicionar</button>
+            </div>
 
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla vero velit, harum aperiam ea cum! Itaque facilis suscipit, consequuntur eos aperiam architecto porro quasi nihil, et odio ab asperiores? Fugiat?</p>
+            <div class="card hbo">
+                <span class="product-tag" style="border-color: #9933CC; color: #9933CC;">Séries Épicas</span>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/1/17/HBO_Max_Logo.svg" alt="HBO Max" class="card-logo" style="height: 40px;">
+                <h3>HBO Max</h3>
+                <p class="card-description">A casa de Game of Thrones, Harry Potter e DC Comics. Tudo em 4K.</p>
+                <div class="price">R$ 19,90</div>
+                <div class="stock-badge" id="stock-hbo">...</div>
+                <button class="btn" id="btn-hbo" onclick="addToCart('HBO Max 4K', 19.90, 'hbo')">Adicionar</button>
+            </div>
 
-                <ul>
-                    <li>1.5 = <abbr title="bolo de chocolate">cupcake</abbr></li>
-                    <li>1.5 = cupcake</li>
-                    <li>1.5 = cupcake</li>
-                    <li>1.5 = cupcake</li>
-                    <li>1.5 = cupcake</li>
-                    <li>1.5 = cupcake</li>
-                    <li>1.5 = cupcake</li>
-                    <li>1.5 = cupcake</li>
-                    <li>1.5 = cupcake</li>
-                    <li>1.5 = cupcake</li>
-                    
-                </ul>
-                
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores adipisci neque atque maxime doloribus nisi quos, excepturi cupiditate asperiores velit beatae ullam sequi corrupti, illum ipsa deleniti pariatur, ut inventore? Lorem ipsum dolor, sit amet </p>
-            </aside>
+            <div class="card crunchy">
+                <span class="product-tag" style="border-color: #F47521; color: #F47521;">Animes</span>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/7/75/Crunchyroll_Logo.svg" alt="Crunchyroll" class="card-logo" style="height: 40px;">
+                <h3>Crunchyroll</h3>
+                <p class="card-description">O maior acervo de animes do mundo. Sem anúncios e episódios 1h após o Japão.</p>
+                <div class="price">R$ 14,90</div>
+                <div class="stock-badge" id="stock-crunchy">...</div>
+                <button class="btn" id="btn-crunchy" onclick="addToCart('Crunchyroll Premium', 14.90, 'crunchy')">Adicionar</button>
+            </div>
+
+            <div class="card netflix">
+                <span class="product-tag" style="border-color: #444; color: #fff;">Econômico</span>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" alt="Netflix" class="card-logo">
+                <h3>Netflix HD</h3>
+                <p class="card-description">Plano econômico Full HD. 2 Telas com intervalos comerciais esporádicos.</p>
+                <div class="price" style="color: #ccc; text-shadow: none;">R$ 18,90</div>
+                <div class="stock-badge" id="stock-netflix_hd">...</div>
+                <button class="btn" id="btn-netflix_hd" onclick="addToCart('Netflix HD (Ads)', 18.90, 'netflix_hd')" style="border-color: #444; color: #fff;">Adicionar</button>
+            </div>
+
+        </div>
+
+        <div class="section-header" style="margin-top: 80px; border-color: var(--capcut-teal);">
+            <h2 class="section-title">APPS & <span>EDIÇÃO</span></h2>
+        </div>
+
+        <div class="grid">
             
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat optio eius velit eligendi dignissimos hic, dolor, similique architecto soluta ex odio recusandae illo quam. Neque cum doloribus nostrum reprehenderit fugiat.</p>
-       </article>
-    </main>
-    <footer>
-      <p>Site criado por Erik Duarte</p>
-    </footer>
+            <div class="card capcut">
+                <span class="product-tag" style="border-color: #00ebd3; color: #00ebd3;">Profissional</span>
+                <div class="card-logo" style="display:flex; justify-content:center; align-items:center; font-weight:900; font-size:1.5rem; letter-spacing:-1px;">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/2/29/CapCut_logo.svg" alt="CapCut" style="height: 50px;">
+                </div>
+                <h3>CapCut Pro</h3>
+                <p class="card-description">Desbloqueie todos os recursos, efeitos e transições PRO. Sem marca d'água.</p>
+                <div class="price">R$ 25,00</div>
+                <div class="stock-badge" id="stock-capcut">...</div>
+                <button class="btn" id="btn-capcut" onclick="addToCart('CapCut Pro', 25.00, 'capcut')">Adicionar</button>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="modal-overlay" id="loginModal">
+        <div class="modal-card">
+            <span onclick="closeModal('loginModal')" style="position: absolute; top: 20px; right: 20px; color: #666; cursor: pointer; font-size: 1.5rem;">&times;</span>
+            <div class="login-header"><h2 id="modalTitle">Bem-vindo</h2><p id="modalSubtitle">Acesse sua conta para continuar</p></div>
+            <form id="authForm" onsubmit="handleAuth(event)">
+                <div class="input-group" id="nameGroup" style="display: none;"><input type="text" class="input-field" placeholder="Seu Nome Completo" id="inputName"></div>
+                <div class="input-group"><input type="email" class="input-field" placeholder="Email" required id="inputEmail"></div>
+                <div class="input-group"><input type="password" class="input-field" placeholder="Senha" required id="inputPassword"></div>
+                <button type="submit" class="submit-btn" id="submitAuthBtn">ENTRAR</button>
+            </form>
+            <div class="toggle-auth" id="toggleText">Novo por aqui? <span onclick="toggleMode()">Criar uma conta</span></div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="pixModal">
+        <div class="modal-card" style="text-align: center;">
+            <span onclick="closeModal('pixModal')" style="position: absolute; top: 20px; right: 20px; color: #666; cursor: pointer;">&times;</span>
+            <h2 style="color: var(--primary); margin-bottom: 15px;">Pagamento Pix</h2>
+            <div id="pixStep1">
+                <p style="color: #888; margin-bottom: 20px;">Escaneie o QR Code abaixo</p>
+                <div style="background: #fff; padding: 10px; display: inline-block; border-radius: 8px;"><img id="qrImage" src="" width="180"></div>
+                <p style="font-size: 0.8rem; color: #666; margin-top: 15px;">Ou copie:</p>
+                <div class="pix-code" id="pixCode">...</div>
+                <button class="secondary-btn" onclick="copyPix()" id="copyBtn">COPIAR CÓDIGO</button>
+                <hr style="border-color: #222; margin: 20px 0;">
+                <button class="submit-btn" onclick="confirmPaymentSimulation()" style="background: var(--success); color: #000;">JÁ REALIZEI O PAGAMENTO</button>
+                <div id="paymentError" class="error-box">Pagamento não confirmado. Aguarde e tente novamente.</div>
+            </div>
+            <div id="pixStep2" style="display: none;"><i class="fa-solid fa-circle-notch fa-spin" style="font-size: 3rem; color: var(--primary); margin: 20px 0;"></i><p style="color: #fff; margin-top: 15px;">Validando...</p></div>
+            <div id="pixStep3" style="display: none;"><i class="fa-solid fa-check-circle" style="font-size: 4rem; color: var(--success); margin: 20px 0;"></i><h3 style="color: #fff; margin: 20px 0;">Compra Aprovada!</h3><button class="submit-btn" onclick="goToLibrary()">ABRIR MEUS ACESSOS</button></div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="profileModal">
+        <div class="modal-card">
+            <span onclick="closeModal('profileModal')" style="position: absolute; top: 20px; right: 20px; color: #666; cursor: pointer; font-size: 1.5rem;">&times;</span>
+            <div class="profile-header"><div class="profile-avatar"><i class="fa-solid fa-user"></i></div><div class="profile-info"><h3 id="profileName">Usuário</h3><p style="color:var(--primary); font-size:0.8rem;">Membro VIP</p></div></div>
+            <h4 style="color: #fff; margin-bottom: 15px;">Histórico de Compras</h4>
+            <div id="profileHistory" class="history-list"></div>
+            <button class="secondary-btn logout-btn" onclick="logout()"><i class="fa-solid fa-sign-out-alt"></i> SAIR DA CONTA</button>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="libraryModal">
+        <div class="modal-card modal-wide">
+            <span onclick="closeModal('libraryModal')" style="position: absolute; top: 20px; right: 20px; color: #666; cursor: pointer; font-size: 1.5rem;">&times;</span>
+            <h2 style="color: var(--primary); border-bottom: 1px solid #333; padding-bottom: 15px; margin-bottom: 20px;"><i class="fa-solid fa-vault"></i> Cofre de Senhas</h2>
+            <div id="accessList" class="access-grid"></div>
+        </div>
+    </div>
+
+    <script>
+        // CONFIGURAÇÃO
+        const PIX_CHAVE = "+55 83987310897"; 
+        const PIX_NOME  = "Erik Duarte da Silva"; 
+        const PIX_CIDADE= "Itapororoca"; 
+        const TEMPO_ESPERA = 20000; 
+
+        /* =================================================================
+           CONFIGURAÇÃO DE ESTOQUE (Adicione suas contas aqui)
+           Separe cada conta por vírgula dentro dos colchetes.
+           =================================================================
+        */
+        const inventory = {
+            'netflix': [
+                { l: 'conta1@net.com', p: 'Senha123' },
+                { l: 'conta2@net.com', p: 'Senha456' } 
+                // Adicione mais aqui: { l: '...', p: '...' },
+            ],
+            'disney': [
+                { l: 'disney@mail.com', p: 'Mickey01'},
+                { l: 'disney@mail.com', p: 'Mickey01' }
+            ],
+            
+            'hbo': [
+                { l: 'hbo@max.com', p: 'hbo123' }
+            ],
+            'crunchy': [
+                { l: 'anime@fan.com', p: 'naruto' }
+            ],
+            'netflix_hd': [
+                { l: 'hd@net.com', p: 'xyz' }
+            ],
+            'capcut': [
+                { l: 'editor@pro.com', p: 'edit123' }
+            ]
+        };
+
+        // VARIÁVEIS GLOBAIS
+        let cart = [];
+        let currentUser = localStorage.getItem('currentSessionName'); 
+        let isRegistering = false;
+        let pixCodeGenerated = '';
+        let myPurchases = [];
+        let pixGeneratedTime = 0;
+
+        window.onload = () => { 
+            if(currentUser) updateHeaderUser(currentUser);
+            const savedPurchases = localStorage.getItem('erikPurchases');
+            if(savedPurchases) myPurchases = JSON.parse(savedPurchases);
+            updateStockDisplay();
+        };
+
+        // --- SISTEMA ---
+        function updateStockDisplay() {
+            updateBadge('stock-netflix', 'netflix', 'btn-netflix');
+            updateBadge('stock-disney', 'disney', 'btn-disney');
+            updateBadge('stock-netflix_hd', 'netflix_hd', 'btn-netflix_hd');
+            updateBadge('stock-hbo', 'hbo', 'btn-hbo');
+            updateBadge('stock-crunchy', 'crunchy', 'btn-crunchy');
+            updateBadge('stock-capcut', 'capcut', 'btn-capcut');
+        }
+
+        function updateBadge(elId, type, btnId) {
+            const el = document.getElementById(elId);
+            const btn = document.getElementById(btnId);
+            const count = inventory[type] ? inventory[type].length : 0;
+            el.innerHTML = `Restam: <span style="color: #fff">${count} unidades</span>`;
+            if (count === 0) {
+                el.classList.add('sold-out'); el.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> ESGOTADO`; btn.disabled = true; btn.innerText = "Indisponível";
+            } else { el.classList.remove('sold-out'); btn.disabled = false; btn.innerText = "ADICIONAR"; }
+        }
+
+        function toggleCart() { document.getElementById('cartSidebar').classList.toggle('open'); }
+        function addToCart(name, price, type) { cart.push({name, price, type}); renderCart(); document.getElementById('cartSidebar').classList.add('open'); }
+        function removeFromCart(index) { cart.splice(index, 1); renderCart(); }
+        function renderCart() {
+            const c = document.getElementById('cartItems'); const t = document.getElementById('cartTotal'); document.getElementById('cartCount').innerText = cart.length;
+            if(cart.length === 0) { c.innerHTML = '<p style="text-align: center; color: #444; margin-top: 50px;">Vazio</p>'; t.innerText = 'R$ 0,00'; return; }
+            let h = '', tot = 0;
+            cart.forEach((i, idx) => { tot += i.price; h += `<div class="cart-item"><div><div style="font-weight:bold; color:#fff">${i.name}</div><div style="color:var(--primary); font-size: 0.9rem;">R$ ${i.price.toFixed(2)}</div></div><i class="fa-solid fa-trash cart-remove" onclick="removeFromCart(${idx})"></i></div>`; });
+            c.innerHTML = h; t.innerText = `R$ ${tot.toFixed(2).replace('.',',')}`;
+        }
+
+        function checkout() {
+            if(!currentUser) { alert('Faça login.'); openLogin(); return; }
+            if(cart.length === 0) return alert('Vazio.');
+            for (let i of cart) { if (!inventory[i.type] || inventory[i.type].length === 0) { alert(`${i.name} esgotou!`); return; } }
+            const tot = cart.reduce((acc, i) => acc + i.price, 0);
+            
+            let k = PIX_CHAVE;
+            if (!k.includes('@') && k.length < 32) k = k.replace(/[^a-zA-Z0-9+]/g, '');
+            const n = PIX_NOME.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+            const c = PIX_CIDADE.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+
+            pixCodeGenerated = gerarPixPayload(k, n, c, tot.toFixed(2));
+            document.getElementById('pixCode').innerText = pixCodeGenerated;
+            document.getElementById('qrImage').src = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(pixCodeGenerated)}`;
+            pixGeneratedTime = Date.now();
+            document.getElementById('pixStep1').style.display = 'block'; document.getElementById('pixStep2').style.display = 'none'; document.getElementById('pixStep3').style.display = 'none'; document.getElementById('paymentError').style.display = 'none';
+            toggleCart(); document.getElementById('pixModal').classList.add('active');
+        }
+
+        function confirmPaymentSimulation() {
+            document.getElementById('paymentError').style.display = 'none';
+            document.getElementById('pixStep1').style.display = 'none';
+            document.getElementById('pixStep2').style.display = 'block';
+            setTimeout(() => {
+                if (Date.now() - pixGeneratedTime < TEMPO_ESPERA) {
+                    document.getElementById('pixStep2').style.display = 'none'; document.getElementById('pixStep1').style.display = 'block'; document.getElementById('paymentError').style.display = 'block';
+                } else {
+                    processDelivery(); document.getElementById('pixStep2').style.display = 'none'; document.getElementById('pixStep3').style.display = 'block';
+                }
+            }, 3000);
+        }
+
+        function processDelivery() {
+            cart.forEach(item => {
+                const account = inventory[item.type].shift();
+                if(!account) return; 
+                myPurchases.push({ product: item.name, login: account.l, pass: account.p, date: new Date().toLocaleDateString() });
+            });
+            localStorage.setItem('erikPurchases', JSON.stringify(myPurchases));
+            cart = []; renderCart(); updateStockDisplay();
+        }
+
+        function handleAuthClick() { if(currentUser) openProfile(); else openLogin(); }
+        function openProfile() { document.getElementById('profileName').innerText = currentUser; renderProfileHistory(); document.getElementById('profileModal').classList.add('active'); }
+        function renderProfileHistory() {
+            const c = document.getElementById('profileHistory');
+            if(myPurchases.length === 0) { c.innerHTML = '<p style="color: #666; text-align: center; padding: 20px;">Vazio.</p>'; return; }
+            let h = ''; [...myPurchases].reverse().forEach(p => { h += `<div class="history-item" onclick="goToLibrary()"><div><h4 style="color:#fff">${p.product}</h4><span style="color:#666; font-size:0.8rem">${p.date}</span></div><i class="fa-solid fa-chevron-right" style="color:var(--primary)"></i></div>`; });
+            c.innerHTML = h;
+        }
+        function logout() { if(confirm("Sair?")) { localStorage.removeItem('currentSessionName'); currentUser = null; location.reload(); } }
+        function openLogin() { document.getElementById('loginModal').classList.add('active'); }
+        function closeModal(id) { document.getElementById(id).classList.remove('active'); if(id === 'pixModal') document.getElementById('paymentError').style.display = 'none'; }
+        function toggleMode() { isRegistering = !isRegistering; const t = document.getElementById('modalTitle'), s = document.getElementById('modalSubtitle'), b = document.getElementById('submitAuthBtn'), tog = document.getElementById('toggleText'), ng = document.getElementById('nameGroup'); if(isRegistering) { t.innerText = "Criar Conta"; s.innerText = "Preencha seus dados"; b.innerText = "CADASTRAR"; tog.innerHTML = 'Já tem conta? <span onclick="toggleMode()">Fazer Login</span>'; ng.style.display = 'block'; document.getElementById('inputName').required = true; } else { t.innerText = "Bem-vindo"; s.innerText = "Acesse sua conta"; b.innerText = "ENTRAR"; tog.innerHTML = 'Novo? <span onclick="toggleMode()">Criar conta</span>'; ng.style.display = 'none'; document.getElementById('inputName').required = false; } }
+        function handleAuth(e) { e.preventDefault(); const em = document.getElementById('inputEmail').value.trim(), pw = document.getElementById('inputPassword').value; if(isRegistering) { const nm = document.getElementById('inputName').value.trim(); if (localStorage.getItem('user_' + em)) return alert('Email cadastrado.'); localStorage.setItem('user_' + em, JSON.stringify({name: nm, email: em, password: pw})); loginSuccess(nm); alert('Conta criada!'); } else { const u = localStorage.getItem('user_' + em); if (!u) return alert('Conta não encontrada.'); const ud = JSON.parse(u); if (ud.password !== pw) return alert('Senha incorreta.'); loginSuccess(ud.name); } }
+        function loginSuccess(n) { currentUser = n; localStorage.setItem('currentSessionName', n); closeModal('loginModal'); updateHeaderUser(n); }
+        function updateHeaderUser(n) { document.getElementById('authBtn').innerHTML = `<i class="fa-solid fa-user-check"></i> <span>${n}</span>`; document.getElementById('authBtn').style.color = 'var(--primary)'; document.getElementById('myAccessBtn').style.display = 'flex'; }
+        function goToLibrary() { closeModal('pixModal'); closeModal('profileModal'); document.getElementById('libraryModal').classList.add('active'); renderLibrary(); }
+        function openLibrary() { goToLibrary(); }
+        function renderLibrary() { const c = document.getElementById('accessList'); if(myPurchases.length === 0) { c.innerHTML = '<p style="color: #666; grid-column: 1/-1; text-align: center;">Vazio.</p>'; return; } let h = ''; [...myPurchases].reverse().forEach(p => { h += `<div class="access-card"><h4>${p.product} <span style="float:right; font-size:0.7rem; color:#666">${p.date}</span></h4><div class="credential-box"><span>Login:</span><span class="credential-value">${p.login}</span><i class="fa-regular fa-copy copy-icon" onclick="copyText('${p.login}')"></i></div><div class="credential-box"><span>Senha:</span><span class="credential-value blur-text" onclick="this.classList.toggle('revealed')">${p.pass}</span><i class="fa-regular fa-copy copy-icon" onclick="copyText('${p.pass}')"></i></div></div>`; }); c.innerHTML = h; }
+        function copyText(t) { navigator.clipboard.writeText(t); alert("Copiado!"); }
+        function copyPix() { navigator.clipboard.writeText(pixCodeGenerated).then(() => { const b = document.getElementById('copyBtn'); b.innerHTML = 'COPIADO!'; b.style.background = '#00ff88'; b.style.color='#000'; setTimeout(() => { b.style.background = '#151515'; b.style.color='#fff'; b.innerHTML = 'COPIAR CÓDIGO'; }, 2000); }); }
+        function gerarPixPayload(k, n, c, v) { const t = "***", f = (i, val) => `${i}${val.length.toString().padStart(2, '0')}${val}`, p = [f('00', '01'), f('26', [f('00', 'br.gov.bcb.pix'), f('01', k)].join('')), f('52', '0000'), f('53', '986'), f('54', v), f('58', 'BR'), f('59', n), f('60', c), f('62', [f('05', t)].join(''))].join(''); return p + "6304" + crc16ccitt(p + "6304"); }
+        function crc16ccitt(s) { let crc = 0xFFFF; for (let i = 0; i < s.length; i++) { let c = s.charCodeAt(i); crc ^= c << 8; for (let j = 0; j < 8; j++) { if (crc & 0x8000) crc = (crc << 1) ^ 0x1021; else crc = crc << 1; } } return (crc & 0xFFFF).toString(16).toUpperCase().padStart(4, '0'); }
+    </script>
 </body>
 </html>
