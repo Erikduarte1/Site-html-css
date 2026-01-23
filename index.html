@@ -96,7 +96,6 @@
             text-align: center; transition: all 0.3s ease; position: relative; overflow: hidden; display: flex; flex-direction: column;
         }
         
-        /* HOVERS */
         .card:hover { transform: translateY(-8px); border-color: var(--primary); box-shadow: 0 10px 50px rgba(0, 242, 255, 0.1); }
         .card.netflix:hover { border-color: var(--netflix-red); box-shadow: 0 10px 50px rgba(229, 9, 20, 0.3); }
         .card.disney:hover { border-color: var(--disney-blue); box-shadow: 0 10px 50px rgba(17, 60, 207, 0.3); }
@@ -108,12 +107,6 @@
         
         .product-tag { background: rgba(0, 242, 255, 0.05); color: var(--primary); padding: 6px 14px; border-radius: 50px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; align-self: center; border: 1px solid rgba(0, 242, 255, 0.2); letter-spacing: 1px; transition: 0.3s; }
         
-        .card.netflix:hover .product-tag { border-color: var(--netflix-red); color: var(--netflix-red); background: rgba(229, 9, 20, 0.1); }
-        .card.disney:hover .product-tag { border-color: var(--disney-blue); color: var(--disney-blue); background: rgba(17, 60, 207, 0.1); }
-        .card.hbo:hover .product-tag { border-color: var(--hbo-purple); color: var(--hbo-purple); background: rgba(153, 51, 204, 0.1); }
-        .card.crunchy:hover .product-tag { border-color: var(--crunchy-orange); color: var(--crunchy-orange); background: rgba(244, 117, 33, 0.1); }
-        .card.capcut:hover .product-tag { border-color: var(--capcut-teal); color: var(--capcut-teal); background: rgba(0, 235, 211, 0.1); }
-
         .card h3 { font-size: 1.4rem; margin: 10px 0 10px; font-weight: 700; color: #fff; }
         .card-description { color: #888; font-size: 0.9rem; line-height: 1.5; margin-bottom: 20px; min-height: 50px; }
         .price { font-size: 2.2rem; color: #fff; font-weight: 700; margin-bottom: 5px; text-shadow: 0 0 15px rgba(0, 242, 255, 0.2); }
@@ -125,15 +118,8 @@
         .btn { width: 100%; padding: 15px; background: transparent; border: 1px solid var(--border); color: var(--primary); font-weight: 700; text-transform: uppercase; cursor: pointer; transition: 0.3s; border-radius: 8px; margin-top: auto; letter-spacing: 1px; font-size: 0.9rem; }
         .btn:hover { background: var(--primary); color: #000; box-shadow: 0 0 25px rgba(0, 242, 255, 0.4); }
         
-        .card.netflix:hover .btn { background: var(--netflix-red); color: #fff; border-color: var(--netflix-red); box-shadow: 0 0 20px rgba(229, 9, 20, 0.5); }
-        .card.disney:hover .btn { background: var(--disney-blue); color: #fff; border-color: var(--disney-blue); box-shadow: 0 0 20px rgba(17, 60, 207, 0.5); }
-        .card.hbo:hover .btn { background: var(--hbo-purple); color: #fff; border-color: var(--hbo-purple); box-shadow: 0 0 20px rgba(153, 51, 204, 0.5); }
-        .card.crunchy:hover .btn { background: var(--crunchy-orange); color: #fff; border-color: var(--crunchy-orange); box-shadow: 0 0 20px rgba(244, 117, 33, 0.5); }
-        .card.capcut:hover .btn { background: var(--capcut-teal); color: #000; border-color: var(--capcut-teal); box-shadow: 0 0 20px rgba(0, 235, 211, 0.5); }
-        
         .btn:disabled { opacity: 0.5; cursor: not-allowed; border-color: #333; color: #555; background: transparent; box-shadow: none; }
 
-        /* --- RODAPÉ COMUNIDADE --- */
         .community-footer { text-align: center; padding: 4rem 5%; border-top: 1px solid #222; margin-top: 4rem; background: #0a0b10; }
         .community-btn { 
             display: inline-flex; align-items: center; gap: 10px; padding: 12px 25px; border-radius: 8px; 
@@ -144,50 +130,23 @@
         .btn-telegram { color: #fff; border-color: var(--telegram); background: rgba(0, 136, 204, 0.1); }
         .btn-telegram:hover { background: var(--telegram); box-shadow: 0 0 20px rgba(0, 136, 204, 0.5); transform: translateY(-3px); }
 
-        /* --- MODALS & SIDEBAR --- */
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); backdrop-filter: blur(5px); z-index: 2000; display: none; align-items: center; justify-content: center; }
         .modal-overlay.active { display: flex; animation: fadeIn 0.3s; }
         .modal-card { background: #0f0f0f; width: 90%; max-width: 450px; padding: 2.5rem; border-radius: 20px; border: 1px solid #333; position: relative; box-shadow: 0 0 50px rgba(0,0,0,0.5); }
         .modal-wide { max-width: 800px; }
         
-        .login-header { text-align: center; margin-bottom: 2rem; }
-        .login-header h2 { color: #fff; font-weight: 300; font-size: 1.8rem; margin-bottom: 0.5rem; }
-        .login-header p { color: #666; font-size: 0.9rem; }
-        .toggle-auth { text-align: center; margin-top: 20px; font-size: 0.85rem; color: #666; cursor: pointer; }
-        .toggle-auth span { color: var(--primary); text-decoration: underline; }
-
         .input-field { width: 100%; padding: 15px; background: #1a1a1a; border: 1px solid #333; color: #fff; margin-bottom: 15px; border-radius: 8px; outline: none; transition: 0.3s; }
-        .input-field:focus { border-color: var(--primary); }
         .submit-btn { width: 100%; padding: 15px; background: var(--gradient); border: none; border-radius: 8px; color: #000; font-weight: 800; cursor: pointer; margin-top: 10px; font-size: 1rem; }
         
-        .secondary-btn { margin-top: 10px; border: 1px solid #333; background: #151515; color: #fff; padding: 12px; width: 100%; border-radius: 8px; cursor: pointer; transition: 0.3s; }
-        .secondary-btn:hover { border-color: var(--primary); color: var(--primary); }
-
         .sidebar { position: fixed; top: 0; right: -400px; width: 380px; height: 100%; background: #0a0a0a; border-left: 1px solid #222; z-index: 2500; padding: 2rem; display: flex; flex-direction: column; transition: 0.4s ease; box-shadow: -20px 0 50px rgba(0,0,0,0.5); }
         .sidebar.open { right: 0; }
         .cart-item { display: flex; justify-content: space-between; padding: 15px 0; border-bottom: 1px solid #222; align-items: center; }
-        .cart-remove { color: var(--danger); cursor: pointer; padding: 5px; transition: 0.2s; }
-        .cart-remove:hover { transform: scale(1.2); }
 
-        .pix-code { background: #000; padding: 15px; border-radius: 8px; color: #888; font-family: monospace; font-size: 0.85rem; margin: 15px 0; border: 1px dashed #333; word-break: break-all; }
-        .error-box { display: none; background: rgba(255, 51, 85, 0.1); border: 1px solid var(--danger); color: var(--danger); padding: 12px; border-radius: 8px; margin-top: 15px; font-size: 0.9rem; }
-
-        .profile-header { display: flex; align-items: center; gap: 15px; margin-bottom: 25px; padding-bottom: 20px; border-bottom: 1px solid #222; }
-        .profile-avatar { width: 60px; height: 60px; background: var(--gradient); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: #000; font-weight: bold; }
-        .history-list { max-height: 300px; overflow-y: auto; margin-bottom: 20px; }
-        .history-item { display: flex; justify-content: space-between; align-items: center; background: #1a1a1a; padding: 15px; border-radius: 8px; margin-bottom: 10px; cursor: pointer; transition: 0.3s; }
-        .history-item:hover { background: #222; border-left: 2px solid var(--primary); }
-        
         .access-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 20px; max-height: 60vh; overflow-y: auto; }
         .access-card { background: #151515; border: 1px solid #222; border-radius: 10px; padding: 1.5rem; display: flex; flex-direction: column; gap: 10px; border-left: 3px solid var(--primary); }
         .credential-box { background: #000; padding: 12px; border-radius: 6px; font-family: monospace; display: flex; justify-content: space-between; align-items: center; font-size: 0.9rem; border: 1px solid #222; }
         .blur-text { filter: blur(5px); cursor: pointer; transition: 0.3s; user-select: none; }
         .blur-text:hover, .blur-text.revealed { filter: blur(0); }
-        .copy-icon { color: #555; cursor: pointer; transition: 0.3s; }
-        .copy-icon:hover { color: var(--primary); }
-
-        .logout-btn { background: rgba(255, 51, 85, 0.1); color: var(--danger); border: 1px solid var(--danger); }
-        .logout-btn:hover { background: var(--danger); color: #fff; border-color: var(--danger); }
 
         @keyframes fadeIn { from{opacity:0} to{opacity:1} }
     </style>
@@ -329,10 +288,10 @@
     <footer class="community-footer">
         <h3 style="color: #fff; margin-bottom: 20px; font-weight: 300; font-size: 1.5rem;">Participe da nossa <span style="color: var(--primary);">Comunidade</span></h3>
         <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
-            <a href="https://discord.gg/GAzCEr5F" target="_blank" class="community-btn btn-discord">
+            <a href="#" target="_blank" class="community-btn btn-discord">
                 <i class="fa-brands fa-discord" style="font-size: 1.2rem;"></i> Discord
             </a>
-            <a href="https://t.me/+Fp8ErmzH37EyODFh" target="_blank" class="community-btn btn-telegram">
+            <a href="#" target="_blank" class="community-btn btn-telegram">
                 <i class="fa-brands fa-telegram" style="font-size: 1.2rem;"></i> Telegram
             </a>
         </div>
@@ -360,7 +319,6 @@
             <div id="pixStep1">
                 <p style="color: #888; margin-bottom: 20px;">Escaneie o QR Code abaixo</p>
                 <div style="background: #fff; padding: 10px; display: inline-block; border-radius: 8px;"><img id="qrImage" src="" width="180"></div>
-                <p style="font-size: 0.8rem; color: #666; margin-top: 15px;">Ou copie:</p>
                 <div class="pix-code" id="pixCode">...</div>
                 <button class="secondary-btn" onclick="copyPix()" id="copyBtn">COPIAR CÓDIGO</button>
                 <hr style="border-color: #222; margin: 20px 0;">
@@ -391,40 +349,29 @@
     </div>
 
     <script>
-        // CONFIGURAÇÃO
         const PIX_CHAVE = "+55 83987310897"; 
         const PIX_NOME  = "Erik Duarte da Silva"; 
         const PIX_CIDADE= "Itapororoca"; 
-        const TEMPO_ESPERA = 15000; // 50 segundos de trava
+        const TEMPO_ESPERA = 15000; 
 
-        /* =================================================================
-           CONFIGURAÇÃO DE ESTOQUE (Adicione suas contas aqui)
-           l = login | p = senha | t = tela (perfil) | pin = senha da tela
-           =================================================================
-        */
+        // FUNÇÃO PARA GERAR 100 ITENS DE ESTOQUE
+        function generateStock(type) {
+            const stock = [];
+            for(let i = 1; i <= 100; i++) {
+                stock.push({ l: `${type}${i}@prime.com`, p: `Senha${i}#`, t: `Tela ${i%5 + 1}`, pin: `${i}${i}${i}${i}`.substring(0,4) });
+            }
+            return stock;
+        }
+
         const inventory = {
-            'netflix': [
-                { l: 'conta1@net.com', p: 'Senha123', t: 'Tela 1', pin: '1111' },
-                { l: 'conta2@net.com', p: 'Senha456', t: 'Tela 2', pin: '2222' } 
-            ],
-            'disney': [
-                { l: 'disney@mail.com', p: 'Mickey01', t: 'Tela 2', pin: '0000' }
-            ],
-            'hbo': [
-                { l: 'hbo@max.com', p: 'hbo123', t: 'Erik', pin: '1234' }
-            ],
-            'crunchy': [
-                { l: 'anime@fan.com', p: 'naruto', t: 'Otaku', pin: '0000' }
-            ],
-            'netflix_hd': [
-                { l: 'hd@net.com', p: 'xyz', t: 'Tela Única', pin: 'Não tem' }
-            ],
-            'capcut': [
-                { l: 'editor@pro.com', p: 'edit123', t: 'Pro', pin: '---' }
-            ]
+            'netflix': generateStock('netflix'),
+            'disney': generateStock('disney'),
+            'hbo': generateStock('hbo'),
+            'crunchy': generateStock('crunchy'),
+            'netflix_hd': generateStock('netflixhd'),
+            'capcut': generateStock('capcut')
         };
 
-        // VARIÁVEIS GLOBAIS
         let cart = [];
         let currentUser = localStorage.getItem('currentSessionName'); 
         let isRegistering = false;
@@ -439,7 +386,6 @@
             updateStockDisplay();
         };
 
-        // --- SISTEMA ---
         function updateStockDisplay() {
             updateBadge('stock-netflix', 'netflix', 'btn-netflix');
             updateBadge('stock-disney', 'disney', 'btn-disney');
@@ -455,65 +401,50 @@
             const count = inventory[type] ? inventory[type].length : 0;
             el.innerHTML = `Restam: <span style="color: #fff">${count} unidades</span>`;
             if (count === 0) {
-                el.classList.add('sold-out'); el.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> ESGOTADO`; btn.disabled = true; btn.innerText = "Indisponível";
-            } else { el.classList.remove('sold-out'); btn.disabled = false; btn.innerText = "ADICIONAR"; }
+                el.classList.add('sold-out'); el.innerHTML = `ESGOTADO`; btn.disabled = true;
+            } else { el.classList.remove('sold-out'); btn.disabled = false; }
         }
 
         function toggleCart() { document.getElementById('cartSidebar').classList.toggle('open'); }
-        function addToCart(name, price, type) { cart.push({name, price, type}); renderCart(); document.getElementById('cartSidebar').classList.add('open'); }
+        function addToCart(name, price, type) { cart.push({name, price, type}); renderCart(); toggleCart(); }
         function removeFromCart(index) { cart.splice(index, 1); renderCart(); }
+        
         function renderCart() {
             const c = document.getElementById('cartItems'); const t = document.getElementById('cartTotal'); document.getElementById('cartCount').innerText = cart.length;
             if(cart.length === 0) { c.innerHTML = '<p style="text-align: center; color: #444; margin-top: 50px;">Vazio</p>'; t.innerText = 'R$ 0,00'; return; }
             let h = '', tot = 0;
-            cart.forEach((i, idx) => { tot += i.price; h += `<div class="cart-item"><div><div style="font-weight:bold; color:#fff">${i.name}</div><div style="color:var(--primary); font-size: 0.9rem;">R$ ${i.price.toFixed(2)}</div></div><i class="fa-solid fa-trash cart-remove" onclick="removeFromCart(${idx})"></i></div>`; });
+            cart.forEach((i, idx) => { tot += i.price; h += `<div class="cart-item"><div><div style="font-weight:bold; color:#fff">${i.name}</div><div style="color:var(--primary);">R$ ${i.price.toFixed(2)}</div></div><i class="fa-solid fa-trash" style="color:red; cursor:pointer;" onclick="removeFromCart(${idx})"></i></div>`; });
             c.innerHTML = h; t.innerText = `R$ ${tot.toFixed(2).replace('.',',')}`;
         }
 
         function checkout() {
             if(!currentUser) { alert('Faça login.'); openLogin(); return; }
-            if(cart.length === 0) return alert('Vazio.');
-            for (let i of cart) { if (!inventory[i.type] || inventory[i.type].length === 0) { alert(`${i.name} esgotou!`); return; } }
+            if(cart.length === 0) return;
             const tot = cart.reduce((acc, i) => acc + i.price, 0);
-            
-            let k = PIX_CHAVE;
-            if (!k.includes('@') && k.length < 32) k = k.replace(/[^a-zA-Z0-9+]/g, '');
-            const n = PIX_NOME.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-            const c = PIX_CIDADE.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-
-            pixCodeGenerated = gerarPixPayload(k, n, c, tot.toFixed(2));
+            pixCodeGenerated = "CHAVE_PIX_SIMULADA_PRIME_" + Math.random().toString(36).substring(7).toUpperCase();
             document.getElementById('pixCode').innerText = pixCodeGenerated;
-            document.getElementById('qrImage').src = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(pixCodeGenerated)}`;
+            document.getElementById('qrImage').src = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${pixCodeGenerated}`;
             pixGeneratedTime = Date.now();
-            document.getElementById('pixStep1').style.display = 'block'; document.getElementById('pixStep2').style.display = 'none'; document.getElementById('pixStep3').style.display = 'none'; document.getElementById('paymentError').style.display = 'none';
+            document.getElementById('pixStep1').style.display = 'block'; document.getElementById('pixStep2').style.display = 'none'; document.getElementById('pixStep3').style.display = 'none';
             toggleCart(); document.getElementById('pixModal').classList.add('active');
         }
 
         function confirmPaymentSimulation() {
-            document.getElementById('paymentError').style.display = 'none';
             document.getElementById('pixStep1').style.display = 'none';
             document.getElementById('pixStep2').style.display = 'block';
             setTimeout(() => {
-                if (Date.now() - pixGeneratedTime < TEMPO_ESPERA) {
-                    document.getElementById('pixStep2').style.display = 'none'; document.getElementById('pixStep1').style.display = 'block'; document.getElementById('paymentError').style.display = 'block';
-                } else {
-                    processDelivery(); document.getElementById('pixStep2').style.display = 'none'; document.getElementById('pixStep3').style.display = 'block';
-                }
-            }, 3000);
+                processDelivery(); 
+                document.getElementById('pixStep2').style.display = 'none'; 
+                document.getElementById('pixStep3').style.display = 'block';
+            }, 2000);
         }
 
         function processDelivery() {
             cart.forEach(item => {
                 const account = inventory[item.type].shift();
-                if(!account) return; 
-                myPurchases.push({ 
-                    product: item.name, 
-                    login: account.l, 
-                    pass: account.p, 
-                    screen: account.t,
-                    pin: account.pin,
-                    date: new Date().toLocaleDateString() 
-                });
+                if(account) {
+                    myPurchases.push({ product: item.name, login: account.l, pass: account.p, screen: account.t, pin: account.pin, date: new Date().toLocaleDateString() });
+                }
             });
             localStorage.setItem('erikPurchases', JSON.stringify(myPurchases));
             cart = []; renderCart(); updateStockDisplay();
@@ -523,41 +454,23 @@
         function openProfile() { document.getElementById('profileName').innerText = currentUser; renderProfileHistory(); document.getElementById('profileModal').classList.add('active'); }
         function renderProfileHistory() {
             const c = document.getElementById('profileHistory');
-            if(myPurchases.length === 0) { c.innerHTML = '<p style="color: #666; text-align: center; padding: 20px;">Vazio.</p>'; return; }
-            let h = ''; [...myPurchases].reverse().forEach(p => { h += `<div class="history-item" onclick="goToLibrary()"><div><h4 style="color:#fff">${p.product}</h4><span style="color:#666; font-size:0.8rem">${p.date}</span></div><i class="fa-solid fa-chevron-right" style="color:var(--primary)"></i></div>`; });
-            c.innerHTML = h;
+            let h = ''; myPurchases.forEach(p => { h += `<div class="history-item"><div>${p.product}</div><span>${p.date}</span></div>`; });
+            c.innerHTML = h || 'Sem compras.';
         }
-        function logout() { if(confirm("Sair?")) { localStorage.removeItem('currentSessionName'); currentUser = null; location.reload(); } }
-        function openLogin() { document.getElementById('loginModal').classList.add('active'); }
-        function closeModal(id) { document.getElementById(id).classList.remove('active'); if(id === 'pixModal') document.getElementById('paymentError').style.display = 'none'; }
-        function toggleMode() { isRegistering = !isRegistering; const t = document.getElementById('modalTitle'), s = document.getElementById('modalSubtitle'), b = document.getElementById('submitAuthBtn'), tog = document.getElementById('toggleText'), ng = document.getElementById('nameGroup'); if(isRegistering) { t.innerText = "Criar Conta"; s.innerText = "Preencha seus dados"; b.innerText = "CADASTRAR"; tog.innerHTML = 'Já tem conta? <span onclick="toggleMode()">Fazer Login</span>'; ng.style.display = 'block'; document.getElementById('inputName').required = true; } else { t.innerText = "Bem-vindo"; s.innerText = "Acesse sua conta"; b.innerText = "ENTRAR"; tog.innerHTML = 'Novo? <span onclick="toggleMode()">Criar conta</span>'; ng.style.display = 'none'; document.getElementById('inputName').required = false; } }
-        function handleAuth(e) { e.preventDefault(); const em = document.getElementById('inputEmail').value.trim(), pw = document.getElementById('inputPassword').value; if(isRegistering) { const nm = document.getElementById('inputName').value.trim(); if (localStorage.getItem('user_' + em)) return alert('Email cadastrado.'); localStorage.setItem('user_' + em, JSON.stringify({name: nm, email: em, password: pw})); loginSuccess(nm); alert('Conta criada!'); } else { const u = localStorage.getItem('user_' + em); if (!u) return alert('Conta não encontrada.'); const ud = JSON.parse(u); if (ud.password !== pw) return alert('Senha incorreta.'); loginSuccess(ud.name); } }
-        function loginSuccess(n) { currentUser = n; localStorage.setItem('currentSessionName', n); closeModal('loginModal'); updateHeaderUser(n); }
-        function updateHeaderUser(n) { document.getElementById('authBtn').innerHTML = `<i class="fa-solid fa-user-check"></i> <span>${n}</span>`; document.getElementById('authBtn').style.color = 'var(--primary)'; document.getElementById('myAccessBtn').style.display = 'flex'; }
-        function goToLibrary() { closeModal('pixModal'); closeModal('profileModal'); document.getElementById('libraryModal').classList.add('active'); renderLibrary(); }
-        function openLibrary() { goToLibrary(); }
-        
+        function closeModal(id) { document.getElementById(id).classList.remove('active'); }
+        function handleAuth(e) { e.preventDefault(); const nm = document.getElementById('inputName').value || "Cliente"; currentUser = nm; localStorage.setItem('currentSessionName', nm); updateHeaderUser(nm); closeModal('loginModal'); }
+        function updateHeaderUser(n) { document.getElementById('authBtn').innerText = n; document.getElementById('myAccessBtn').style.display = 'flex'; }
+        function openLibrary() { document.getElementById('libraryModal').classList.add('active'); renderLibrary(); }
+        function goToLibrary() { closeModal('pixModal'); openLibrary(); }
+
         function renderLibrary() { 
             const c = document.getElementById('accessList'); 
-            if(myPurchases.length === 0) { c.innerHTML = '<p style="color: #666; grid-column: 1/-1; text-align: center;">Vazio.</p>'; return; } 
             let h = ''; 
-            [...myPurchases].reverse().forEach(p => { 
-                h += `
-                <div class="access-card">
-                    <h4>${p.product} <span style="float:right; font-size:0.7rem; color:#666">${p.date}</span></h4>
-                    <div class="credential-box"><span>Login:</span><span class="credential-value">${p.login}</span><i class="fa-regular fa-copy copy-icon" onclick="copyText('${p.login}')"></i></div>
-                    <div class="credential-box"><span>Senha:</span><span class="credential-value blur-text" onclick="this.classList.toggle('revealed')">${p.pass}</span><i class="fa-regular fa-copy copy-icon" onclick="copyText('${p.pass}')"></i></div>
-                    <div class="credential-box"><span>Perfil:</span><span class="credential-value">${p.screen || 'Padrão'}</span></div>
-                    <div class="credential-box"><span>PIN:</span><span class="credential-value blur-text" onclick="this.classList.toggle('revealed')">${p.pin || '---'}</span></div>
-                </div>`; 
+            myPurchases.forEach(p => { 
+                h += `<div class="access-card"><h4>${p.product}</h4><div class="credential-box">L: ${p.login}</div><div class="credential-box">S: <span class="blur-text">${p.pass}</span></div><div class="credential-box">P: ${p.screen} | PIN: ${p.pin}</div></div>`; 
             }); 
-            c.innerHTML = h; 
+            c.innerHTML = h || 'Vazio.'; 
         }
-
-        function copyText(t) { navigator.clipboard.writeText(t); alert("Copiado!"); }
-        function copyPix() { navigator.clipboard.writeText(pixCodeGenerated).then(() => { const b = document.getElementById('copyBtn'); b.innerHTML = 'COPIADO!'; b.style.background = '#00ff88'; b.style.color='#000'; setTimeout(() => { b.style.background = '#151515'; b.style.color='#fff'; b.innerHTML = 'COPIAR CÓDIGO'; }, 2000); }); }
-        function gerarPixPayload(k, n, c, v) { const t = "***", f = (i, val) => `${i}${val.length.toString().padStart(2, '0')}${val}`, p = [f('00', '01'), f('26', [f('00', 'br.gov.bcb.pix'), f('01', k)].join('')), f('52', '0000'), f('53', '986'), f('54', v), f('58', 'BR'), f('59', n), f('60', c), f('62', [f('05', t)].join(''))].join(''); return p + "6304" + crc16ccitt(p + "6304"); }
-        function crc16ccitt(s) { let crc = 0xFFFF; for (let i = 0; i < s.length; i++) { let c = s.charCodeAt(i); crc ^= c << 8; for (let j = 0; j < 8; j++) { if (crc & 0x8000) crc = (crc << 1) ^ 0x1021; else crc = crc << 1; } } return (crc & 0xFFFF).toString(16).toUpperCase().padStart(4, '0'); }
     </script>
 </body>
 </html>
