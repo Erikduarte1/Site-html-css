@@ -141,7 +141,6 @@
         }
         .btn-discord { color: #fff; border-color: var(--discord); background: rgba(88, 101, 242, 0.1); }
         .btn-discord:hover { background: var(--discord); box-shadow: 0 0 20px rgba(88, 101, 242, 0.5); transform: translateY(-3px); }
-        
         .btn-telegram { color: #fff; border-color: var(--telegram); background: rgba(0, 136, 204, 0.1); }
         .btn-telegram:hover { background: var(--telegram); box-shadow: 0 0 20px rgba(0, 136, 204, 0.5); transform: translateY(-3px); }
 
@@ -330,10 +329,10 @@
     <footer class="community-footer">
         <h3 style="color: #fff; margin-bottom: 20px; font-weight: 300; font-size: 1.5rem;">Participe da nossa <span style="color: var(--primary);">Comunidade</span></h3>
         <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
-            <a href="SEU_LINK_DISCORD_AQUI" target="_blank" class="community-btn btn-discord">
+            <a href="https://discord.gg/GAzCEr5F" target="_blank" class="community-btn btn-discord">
                 <i class="fa-brands fa-discord" style="font-size: 1.2rem;"></i> Discord
             </a>
-            <a href="SEU_LINK_TELEGRAM_AQUI" target="_blank" class="community-btn btn-telegram">
+            <a href="https://t.me/+Fp8ErmzH37EyODFh" target="_blank" class="community-btn btn-telegram">
                 <i class="fa-brands fa-telegram" style="font-size: 1.2rem;"></i> Telegram
             </a>
         </div>
@@ -396,33 +395,32 @@
         const PIX_CHAVE = "+55 83987310897"; 
         const PIX_NOME  = "Erik Duarte da Silva"; 
         const PIX_CIDADE= "Itapororoca"; 
-        const TEMPO_ESPERA = 20000; 
+        const TEMPO_ESPERA = 15000; // 50 segundos de trava
 
         /* =================================================================
            CONFIGURAÇÃO DE ESTOQUE (Adicione suas contas aqui)
-           Separe cada conta por vírgula dentro dos colchetes.
+           l = login | p = senha | t = tela (perfil) | pin = senha da tela
            =================================================================
         */
         const inventory = {
             'netflix': [
-                { l: 'conta1@net.com', p: 'Senha123' },
-                { l: 'conta2@net.com', p: 'Senha456' } 
-                // Adicione mais aqui: { l: '...', p: '...' },
+                { l: 'conta1@net.com', p: 'Senha123', t: 'Tela 1', pin: '1111' },
+                { l: 'conta2@net.com', p: 'Senha456', t: 'Tela 2', pin: '2222' } 
             ],
             'disney': [
-                { l: 'disney@mail.com', p: 'Mickey01' }
+                { l: 'disney@mail.com', p: 'Mickey01', t: 'Tela 2', pin: '0000' }
             ],
             'hbo': [
-                { l: 'hbo@max.com', p: 'hbo123' }
+                { l: 'hbo@max.com', p: 'hbo123', t: 'Erik', pin: '1234' }
             ],
             'crunchy': [
-                { l: 'anime@fan.com', p: 'naruto' }
+                { l: 'anime@fan.com', p: 'naruto', t: 'Otaku', pin: '0000' }
             ],
             'netflix_hd': [
-                { l: 'hd@net.com', p: 'xyz' }
+                { l: 'hd@net.com', p: 'xyz', t: 'Tela Única', pin: 'Não tem' }
             ],
             'capcut': [
-                { l: 'editor@pro.com', p: 'edit123' }
+                { l: 'editor@pro.com', p: 'edit123', t: 'Pro', pin: '---' }
             ]
         };
 
@@ -508,7 +506,14 @@
             cart.forEach(item => {
                 const account = inventory[item.type].shift();
                 if(!account) return; 
-                myPurchases.push({ product: item.name, login: account.l, pass: account.p, date: new Date().toLocaleDateString() });
+                myPurchases.push({ 
+                    product: item.name, 
+                    login: account.l, 
+                    pass: account.p, 
+                    screen: account.t,
+                    pin: account.pin,
+                    date: new Date().toLocaleDateString() 
+                });
             });
             localStorage.setItem('erikPurchases', JSON.stringify(myPurchases));
             cart = []; renderCart(); updateStockDisplay();
@@ -531,7 +536,24 @@
         function updateHeaderUser(n) { document.getElementById('authBtn').innerHTML = `<i class="fa-solid fa-user-check"></i> <span>${n}</span>`; document.getElementById('authBtn').style.color = 'var(--primary)'; document.getElementById('myAccessBtn').style.display = 'flex'; }
         function goToLibrary() { closeModal('pixModal'); closeModal('profileModal'); document.getElementById('libraryModal').classList.add('active'); renderLibrary(); }
         function openLibrary() { goToLibrary(); }
-        function renderLibrary() { const c = document.getElementById('accessList'); if(myPurchases.length === 0) { c.innerHTML = '<p style="color: #666; grid-column: 1/-1; text-align: center;">Vazio.</p>'; return; } let h = ''; [...myPurchases].reverse().forEach(p => { h += `<div class="access-card"><h4>${p.product} <span style="float:right; font-size:0.7rem; color:#666">${p.date}</span></h4><div class="credential-box"><span>Login:</span><span class="credential-value">${p.login}</span><i class="fa-regular fa-copy copy-icon" onclick="copyText('${p.login}')"></i></div><div class="credential-box"><span>Senha:</span><span class="credential-value blur-text" onclick="this.classList.toggle('revealed')">${p.pass}</span><i class="fa-regular fa-copy copy-icon" onclick="copyText('${p.pass}')"></i></div></div>`; }); c.innerHTML = h; }
+        
+        function renderLibrary() { 
+            const c = document.getElementById('accessList'); 
+            if(myPurchases.length === 0) { c.innerHTML = '<p style="color: #666; grid-column: 1/-1; text-align: center;">Vazio.</p>'; return; } 
+            let h = ''; 
+            [...myPurchases].reverse().forEach(p => { 
+                h += `
+                <div class="access-card">
+                    <h4>${p.product} <span style="float:right; font-size:0.7rem; color:#666">${p.date}</span></h4>
+                    <div class="credential-box"><span>Login:</span><span class="credential-value">${p.login}</span><i class="fa-regular fa-copy copy-icon" onclick="copyText('${p.login}')"></i></div>
+                    <div class="credential-box"><span>Senha:</span><span class="credential-value blur-text" onclick="this.classList.toggle('revealed')">${p.pass}</span><i class="fa-regular fa-copy copy-icon" onclick="copyText('${p.pass}')"></i></div>
+                    <div class="credential-box"><span>Perfil:</span><span class="credential-value">${p.screen || 'Padrão'}</span></div>
+                    <div class="credential-box"><span>PIN:</span><span class="credential-value blur-text" onclick="this.classList.toggle('revealed')">${p.pin || '---'}</span></div>
+                </div>`; 
+            }); 
+            c.innerHTML = h; 
+        }
+
         function copyText(t) { navigator.clipboard.writeText(t); alert("Copiado!"); }
         function copyPix() { navigator.clipboard.writeText(pixCodeGenerated).then(() => { const b = document.getElementById('copyBtn'); b.innerHTML = 'COPIADO!'; b.style.background = '#00ff88'; b.style.color='#000'; setTimeout(() => { b.style.background = '#151515'; b.style.color='#fff'; b.innerHTML = 'COPIAR CÓDIGO'; }, 2000); }); }
         function gerarPixPayload(k, n, c, v) { const t = "***", f = (i, val) => `${i}${val.length.toString().padStart(2, '0')}${val}`, p = [f('00', '01'), f('26', [f('00', 'br.gov.bcb.pix'), f('01', k)].join('')), f('52', '0000'), f('53', '986'), f('54', v), f('58', 'BR'), f('59', n), f('60', c), f('62', [f('05', t)].join(''))].join(''); return p + "6304" + crc16ccitt(p + "6304"); }
